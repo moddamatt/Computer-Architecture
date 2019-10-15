@@ -7,7 +7,32 @@ class CPU:
 
     def __init__(self):
         """Construct a new CPU."""
-        pass
+        self.ram = [0b0] * 256    # 256 bytes of Memory
+        self.reg = [0b0] * 8      # 8 general-purpose registers
+
+        # Interal registers
+        self.pc = 0
+
+        # _opcode_
+        self._opcode_ = { 
+            0b10000010: 'LDI',
+            0b01000111: 'PRN',
+            0b00000001: 'HLT',
+
+            # PC mutators
+            0b01010000: 'CALL',
+            0b00010001: 'RET',
+            0b01010100: 'JMP',
+            
+            # ALU ops
+            0b10100000: 'ADD',
+            0b10100001: 'SUB',
+            0b10100010: 'MUL',
+            0b10100011: 'DIV',
+            0b10100100: 'MOD',
+            0b01100101: 'INC',
+            0b01100110: 'DEC',
+        }
 
     def load(self):
         """Load a program into memory."""
@@ -62,4 +87,24 @@ class CPU:
 
     def run(self):
         """Run the CPU."""
+
+
+    """
+    Ram helper functions
+
+    MAR = _Memory Address Register_ -> Address to store to
+    MDR = _Memory Data Register_    -> Data to read or write
+    """
+    def ram_read(self, MAR):
+        """ 
+        Accepts the address to read and return the value stored
+        there.
+        """
+        return self.reg[MAR]
+
+    def ram_write(self, MAR, MDR):
+        """
+        Accepts a value to write, and the address to write it to
+        """
+        self.reg[MAR] = MDR
         pass

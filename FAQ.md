@@ -15,7 +15,7 @@
 * [If RAM is faster than an SSD, why not just store everything in RAM?](#q1200)
 * [Do CPUs get hot because of the power constantly running through them?](#q1300)
 * [How do I move the `PC` to the next instruction without hardcoding the instruction length?](#q1700)
-* [Why are the ALU and the RAM read/write functions broken out? Can we just code the lines to do the work directly?](#q1900)
+* [Why are the ALU and the RAM read/write functions broken out? Can we just code the lines to do the work         directly?](#q1900)
 * [Why do opcodes have the numeric values that they do?](#q2200)
 * [What is a "cache hit" or "cache miss"?](#q2300)
 * [How are logic gates built?](#q2400)
