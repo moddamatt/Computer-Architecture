@@ -7,7 +7,7 @@ class CPU:
 
     def __init__(self):
         """Construct a new CPU."""
-        self.ram = [0b0] * 256    # 256 bytes of Memory
+        self.ram = [0b0] * 255    # 256 bytes of Memory
         self.reg = [0b0] * 8      # 8 general-purpose registers
 
         # Interal registers
@@ -23,7 +23,7 @@ class CPU:
             0b01010000: 'CALL',
             0b00010001: 'RET',
             0b01010100: 'JMP',
-            
+
             # ALU ops
             0b10100000: 'ADD',
             0b10100001: 'SUB',
@@ -87,7 +87,33 @@ class CPU:
 
     def run(self):
         """Run the CPU."""
+        
+        running = True
 
+        while running:
+            command = self.ram[self.pc]
+
+            # print(command)
+
+            if self._opcode_[command] == 'LDI':
+                address = self.ram[self.pc + 1]
+                value = self.ram[self.pc + 2]
+                self.reg[address] = value
+                self.pc += 3
+            
+            elif self._opcode_[command] == 'PRN':
+                address = self.ram[self.pc + 1]
+                print(self.reg[address])
+                self.pc += 2
+
+            elif self._opcode_[command] == 'HLT':
+                running = False
+
+            else:
+                print(f"Unknown instruction: {command}")
+                sys.exit(1)
+
+        pass
 
     """
     Ram helper functions
